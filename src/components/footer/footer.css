@@ -1,0 +1,14 @@
+.footer-block{
+    height: 55px;
+    width: 100%;
+    background-color: #eaeaea;
+    /* border: 1px solid; */
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-content{
+    margin-left: 10px;
+}

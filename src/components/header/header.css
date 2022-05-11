@@ -1,0 +1,21 @@
+.header-container{
+    height: 90px;
+    width: 100%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: space-around;
+}
+.header-logo{
+    /* margin-left: 20px; */
+}
+.header-link-section{
+   display: flex;
+   align-items: center;
+   margin-right: 20px;
+}
+.header-link-section a{
+    color: #000;
+    text-decoration: none;
+    margin-left: 20px;
+    cursor: pointer;
+}
