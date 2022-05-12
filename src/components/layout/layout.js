@@ -5,10 +5,13 @@ import Login from "../login";
 import Signup from "../signup";
 import Dashboard from "../dashboard";
 import Snackbar from "../snackbar";
+import { useDispatch } from 'react-redux';
+import types from "../../reducers/types";
 
 const Layout = (props) => {
+    
     const [openSnackBar, setOpenSnackBar] = useState(false);
-
+    const dispatch = useDispatch();
     useEffect(()=>{
         if(props.snackBar.open){
             setOpenSnackBar(() => false);
@@ -19,6 +22,7 @@ const Layout = (props) => {
     useEffect(()=>{
         if(openSnackBar){
             setTimeout(() => {
+                dispatch({type: types.OPEN_SNACKBAR, payload : {open: false, message : ''}});
                 setOpenSnackBar(false);
             }, 6000)
         }
@@ -26,7 +30,7 @@ const Layout = (props) => {
     
     return (
         <>
-            <Header />
+            <Header {...props}/>
             {
                 props.path === 'login'
                     ?
