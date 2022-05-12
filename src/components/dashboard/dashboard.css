@@ -1,0 +1,37 @@
+.categories-block{
+    display: flex;
+    margin-top: 1px;
+}
+.categories-list-section{
+    height: calc(100vh - 145px);
+    overflow-y: auto;
+    width: 20%;
+    background-color: #eaeaea;
+}
+.categories-card-section{
+    height: calc(100vh - 145px);
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 15px;
+    width: calc(100vw - 20%);
+}
+.categories-list-item-block{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    height: 40px;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid #b8b4b4;
+}
+.categories-active-item{
+    color: #fff;
+    background-color: #8b8787;
+}
+
+/* css media queries */
+@media only screen and (max-width: 600px) {
+    .categories-list-section{
+        display: none;
+    }
+}

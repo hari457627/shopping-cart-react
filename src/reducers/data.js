@@ -67,11 +67,21 @@ const snackBar = (state = { open: false, message: "" }, action) => {
     }
 }
 
+const currentTab = (state = 0, action) => {
+    switch (action.type) {
+        case types.TAB_CHANGE:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     profileData,
     cartData,
     categoriesData,
     productsData,
     isLoggedIn,
-    snackBar
+    snackBar,
+    currentTab
 });

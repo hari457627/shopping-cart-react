@@ -54,6 +54,34 @@ const actions = {
         catch (err) {
             return { success : false, message: err.message };
         }
+    },
+
+    getCategories: () => async dispatch => {
+        try{
+            const {status, data} = await axios.get("./server/categories/index.get.json");
+            if(status === 200 && data){
+                dispatch({ type: types.CATEGORIES_DATA, payload: data });
+                return { success : true, data };
+            }
+            return { success : false, data: null, message : 'No categories to display' };
+        }
+        catch(err){
+            return { success : false, message: err.message }; 
+        }
+    },
+
+    getCategoryProducts: () => async dispatch => {
+        try{
+            const {status, data} = await axios.get("./server/products/index.get.json");
+            if(status === 200 && data){
+                dispatch({ type: types.PRODUCTS_DATA, payload: data });
+                return { success : true, data };
+            }
+            return { success : false, data: null, message : 'No products to display' };
+        }
+        catch(err){
+            return { success : false, message: err.message }; 
+        }
     }
 }
 
