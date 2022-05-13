@@ -39,6 +39,10 @@ const Dashboard = (props) => {
         setActiveCategoryId(id);
     }
 
+    const handleChange = (val) => {
+        dispatch({type: types.TAB_CHANGE, payload: val});
+    }
+
     useEffect(() => {
         const isLoggedIn = common_actions.isAuthenticated();
         if (isLoggedIn) {
@@ -75,14 +79,15 @@ const Dashboard = (props) => {
     const totalProductsData = (props.productsData && props.productsData.length) ? props.productsData : [];
     const data = (props.currentTab == 0) ? productsData : totalProductsData;
 
-    const renderProductsList = (fromipad = false, hide = false) => {
+    const renderProductsList = (fromipad = false, hide = false, isMinDev = false) => {
+        const dataArr = fromipad ? data.filter(item => item.category === activeCategoryId) : data;
         return (
             <div className={`${fromipad ? 'categories-card-section categories-card-section-block' : 'categories-card-section'}`}>
                 {
-                    (data && data.length) ?
-                        data.map(item => {
+                    (dataArr && dataArr.length) ?
+                        dataArr.map(item => {
                             return (
-                                <ProductCard {...item} path="product" fromipad={fromipad} hide={hide}/>
+                                <ProductCard {...item} path="product" fromipad={fromipad} hide={hide} handleChange={handleChange} isMinDev={isMinDev}/>
                             )
                         })
                         :
@@ -106,7 +111,7 @@ const Dashboard = (props) => {
                             (props.categoriesData && props.categoriesData.length) ?
                                 <div className="categories-block">
                                     {renderCategoryList()}
-                                    {renderProductsList(false, true)}
+                                    {renderProductsList(false, true, false)}
                                     <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
                                         {
                                             props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
@@ -118,7 +123,7 @@ const Dashboard = (props) => {
                                                         {
                                                             props.categoriesData.map((item, index) => {
                                                                 return (
-                                                                    <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} />
+                                                                    <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} handleChange={handleChange}/>
                                                                 )
                                                             })
                                                         }
@@ -128,7 +133,7 @@ const Dashboard = (props) => {
                                                 null
                                         }
                                         {props.currentTab == 1 && renderCategoryList(true)}
-                                        {props.currentTab == 1 && renderProductsList(true, true)}
+                                        {props.currentTab == 1 && renderProductsList(true, true, true)}
                                     </div>
                                 </div>
                                 :

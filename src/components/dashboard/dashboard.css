@@ -47,12 +47,17 @@
     .categories-card-section{
         display: none;
     }
+    .categories-card-section-block{
+        display: block;
+        width: auto;
+        overflow-x: hidden;
+    }
     .categories-card-section-min{
         display: block;
     }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 920px) {
     .categories-list-section{
         display: none;
     }

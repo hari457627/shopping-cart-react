@@ -68,17 +68,32 @@
 .product-card-min{
     display: none;
 }
-div.product-card-min :nth-child(odd){
-    flex-direction: row-reverse;
-}
 .product-card-block{
+    display: none;
+}
+.product-card-min-block{
+    display: none;
+}
+.product-card-min-desc-block{
+    display: flex;
+    clear: both;
+}
+.product-card-mni-desc-block{
+    display: flex;
+    height: 150px;
+    align-items: center;
+    background-color: #eaeaea;
+}
+.product-card-min-desc-block-small{
     display: none;
 }
 
 /* css media queries */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 920px) {
     .product-card{
         display: none;
+        height: 250px;
+        width: 43%;
     }
     .product-card-header{
         display: block;
@@ -88,5 +103,66 @@ div.product-card-min :nth-child(odd){
     }
     .product-card-min{
         display: flex;
+    }
+    .product-card-min-block{
+        display: block;
+    }
+    .product-card-image{
+        height: inherit;
+        width: 150px;
+    }
+    .product-card-description{
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .product-card{
+        display: none;
+        height: 250px;
+        width: 100%;
+    }
+    .product-card-desc-right-block{
+        float: right;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-bottom: 30px;
+        height: 100%;
+    }
+    .product-card-image{
+        float: left;
+        width: 50%;
+    }
+    .product-card-image img{
+        width: 100%;
+        height: 75%;
+        object-fit: contain;
+    }
+    .category-card-min{
+        display: none;
+    }
+    .product-card-block{
+        display: block;
+        width: 95%;
+    }
+    .product-card-min-block{
+        display: block;
+    }
+    .product-card-min-desc-block-medium{
+        display: none;
+    }
+    .product-card-min-desc-block-small{
+        display: block;
+    }
+    .login-button{
+        font-size: 9px !important;
+    }
+    .product-card-small{
+        height: 200px;
+    }
+    .product-card-description{
+        height: 100px;
     }
 }

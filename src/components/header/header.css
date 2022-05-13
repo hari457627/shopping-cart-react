@@ -35,8 +35,12 @@
 
 /* css media queries */
 @media only screen and (max-width: 600px) {
+    .header-container{
+        align-items: center;
+    }
     .header-logo{
         margin-left: 0;
+        height: 75px;
     }
     .header-container-tabs{
         display: none;
