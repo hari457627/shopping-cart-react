@@ -13,8 +13,8 @@ const Dashboard = (props) => {
     const getCategories = async () => {
         const { success, message } = await props.getCategories();
         const productsRes = await props.getCategoryProducts();
-        if(!success || !productsRes.success){
-            dispatch({type: types.OPEN_SNACKBAR, payload : {open: true, message: !success ? message : !productsRes.success ? productsRes.message : 'Failed to fetch data' }});
+        if (!success || !productsRes.success) {
+            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !success ? message : !productsRes.success ? productsRes.message : 'Failed to fetch data' } });
         }
         setLoading(false);
     }
@@ -47,61 +47,96 @@ const Dashboard = (props) => {
     }, [])
 
     useEffect(() => {
-        if(props.categoriesData && props.categoriesData.length){
-            const catid = (props.categoriesData.sort((a,b) => a.key > b.key))[0].id;
+        if (props.categoriesData && props.categoriesData.length) {
+            const catid = (props.categoriesData.sort((a, b) => a.key > b.key))[0].id;
             setActiveCategoryId(catid);
         }
     }, [props.categoriesData]);
+
+    const renderCategoryList = (fromipad = false) => {
+        return (
+            <div className={`${fromipad ? 'categories-list-section categories-list-section-block' : 'categories-list-section'}`}>
+                {
+                    props.categoriesData.sort((a, b) => a.key > b.key).map(item => {
+                        return (
+                            <div className={`categories-list-item-block ${(item.id === activeCategoryId) ? 'categories-active-item' : ''}`} key={item.id} onClick={() => handleClickCategory(item.id)}>
+                                <div>
+                                    {item.name}
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
 
     const productsData = (props.categoriesData && props.categoriesData.length && props.productsData && props.productsData.length) ? props.productsData.filter(item => item.category === activeCategoryId) : [];
     const totalProductsData = (props.productsData && props.productsData.length) ? props.productsData : [];
     const data = (props.currentTab == 0) ? productsData : totalProductsData;
 
+    const renderProductsList = (fromipad = false, hide = false) => {
+        return (
+            <div className={`${fromipad ? 'categories-card-section categories-card-section-block' : 'categories-card-section'}`}>
+                {
+                    (data && data.length) ?
+                        data.map(item => {
+                            return (
+                                <ProductCard {...item} path="product" fromipad={fromipad} hide={hide}/>
+                            )
+                        })
+                        :
+                        <div>
+                            OOPS! No products to display...
+                        </div>
+                }
+            </div>
+        )
+    }
+
     return (
         <div>
             {
                 loading
-                ?
-                <Loader />
-                :
-                <>
-                    {
-                        (props.categoriesData && props.categoriesData.length) ?
-                        <div className="categories-block">
-                            <div className="categories-list-section">
-                                {
-                                    props.categoriesData.sort((a,b) => a.key > b.key).map(item => {
-                                        return (
-                                            <div className={`categories-list-item-block ${(item.id === activeCategoryId) ? 'categories-active-item' : ''}`} key={item.id} onClick={() => handleClickCategory(item.id)}>
-                                                <div>
-                                                    {item.name}
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                            <div className="categories-card-section">
-                                {
-                                    (data && data.length) ?
-                                        data.map(item => {
-                                            return (
-                                                <ProductCard {...item}/>
-                                            )
-                                        })
-                                        :
-                                        <div>
-                                            OOPS! No products to display...
-                                        </div>
-                                }
-                            </div>
-                        </div>
-                        :
-                        <div>
-                            OOPS! No categories to display...
-                        </div>
-                    }
-                </>
+                    ?
+                    <Loader />
+                    :
+                    <>
+                        {
+                            (props.categoriesData && props.categoriesData.length) ?
+                                <div className="categories-block">
+                                    {renderCategoryList()}
+                                    {renderProductsList(false, true)}
+                                    <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
+                                        {
+                                            props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
+                                                <>
+                                                    <div>
+                                                        carosel
+                                                    </div>
+                                                    <div>
+                                                        {
+                                                            props.categoriesData.map((item, index) => {
+                                                                return (
+                                                                    <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} />
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
+                                                null
+                                        }
+                                        {props.currentTab == 1 && renderCategoryList(true)}
+                                        {props.currentTab == 1 && renderProductsList(true, true)}
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                    OOPS! No categories to display...
+                                </div>
+                        }
+                    </>
             }
         </div>
     )

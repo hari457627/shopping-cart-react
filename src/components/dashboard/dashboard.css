@@ -28,10 +28,47 @@
     color: #fff;
     background-color: #8b8787;
 }
+.categories-card-section-min{
+    height: calc(100vh - 145px);
+    overflow-y: auto;
+    flex-grow: 1;
+    display: none;
+}
+.categories-card-section-min-block{
+    display: none;
+    height: calc(100vh - 115px);
+}
 
 /* css media queries */
 @media only screen and (max-width: 600px) {
     .categories-list-section{
         display: none;
+    }
+    .categories-card-section{
+        display: none;
+    }
+    .categories-card-section-min{
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .categories-list-section{
+        display: none;
+    }
+    .categories-card-section{
+        display: none;
+    }
+    .categories-list-section-block{
+        display: block;
+    }
+    .categories-card-section-block{
+        display: block;
+    }
+    .categories-card-section-min{
+        display: block;
+    }
+    .categories-card-section-min-block{
+        display: flex;
     }
 }

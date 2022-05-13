@@ -38,4 +38,7 @@
     .header-logo{
         margin-left: 0;
     }
+    .header-container-tabs{
+        display: none;
+    }
 }
