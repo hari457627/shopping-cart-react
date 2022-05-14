@@ -63,7 +63,7 @@ const productCard = (props) => {
                     </>
                 }
             </div>
-            {!hide && <div key={id} className="product-card-min" style={{ flexDirection: `${even ? 'row-reverse' : 'initial'}` }}>
+            {!hide && <div key={id} className="product-card-min" style={{ flexDirection: `${even ? 'row-reverse' : 'initial'}`, boxShadow: '0px 12px 18px -15px #111' }}>
                 <div className="product-card-image-min">
                     <img className="product-card-src-image-min" src={imageUrl} alt={name} />
                 </div>

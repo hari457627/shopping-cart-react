@@ -64,7 +64,7 @@ const Dashboard = (props) => {
                     props.categoriesData.sort((a, b) => a.key > b.key).map(item => {
                         return (
                             <div className={`categories-list-item-block ${(item.id === activeCategoryId) ? 'categories-active-item' : ''}`} key={item.id} onClick={() => handleClickCategory(item.id)}>
-                                <div>
+                                <div style={{paddingLeft: 20}}>
                                     {item.name}
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ const Dashboard = (props) => {
                             )
                         })
                         :
-                        <div>
+                        <div className="no-products-card">
                             OOPS! No products to display...
                         </div>
                 }
@@ -110,7 +110,7 @@ const Dashboard = (props) => {
                         {
                             (props.categoriesData && props.categoriesData.length) ?
                                 <div className="categories-block">
-                                    <section>{renderCategoryList()}</section>
+                                    {renderCategoryList()}
                                     {renderProductsList(false, true, false)}
                                     <main>
                                         <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
@@ -139,7 +139,7 @@ const Dashboard = (props) => {
                                     </main>
                                 </div>
                                 :
-                                <div>
+                                <div className="no-products-card">
                                     OOPS! No categories to display...
                                 </div>
                         }
