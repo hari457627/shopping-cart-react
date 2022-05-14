@@ -31,6 +31,10 @@ const Header = (props) => {
         return 0;
     }
 
+    const toggleCart = () => {
+        dispatch({type: types.CART_OPEN, payload: !props.cartOpen}); 
+    }
+
     return (
         <header>
             <div className="header-container">
@@ -62,7 +66,7 @@ const Header = (props) => {
                         </>
                     }
                     </nav>
-                    <div className="cart-block">
+                    <div className="cart-block" onClick={toggleCart}>
                         <img src={'./static/images/cart.svg'}/><span style={{fontSize: 14}}>{cartItems()} items</span>
                     </div>
                 </div>

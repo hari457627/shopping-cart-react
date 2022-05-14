@@ -87,6 +87,17 @@ const bannerData = (state = null, action) => {
     }
 }
 
+const cartOpen = (state = false, action) => {
+    switch (action.type) {
+        case types.CART_OPEN:
+            return action.payload;
+        case types.LOGOUT:
+            return false;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     profileData,
     cartData,
@@ -95,5 +106,6 @@ export default combineReducers({
     isLoggedIn,
     snackBar,
     currentTab,
-    bannerData
+    bannerData,
+    cartOpen
 });

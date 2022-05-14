@@ -5,6 +5,7 @@ import types from "../../reducers/types";
 import Loader from "../loader";
 import ProductCard from "../product-card";
 import Carosel from "../carosel";
+import Cart from "../cart";
 import "./dashboard.css";
 
 const Dashboard = (props) => {
@@ -12,11 +13,9 @@ const Dashboard = (props) => {
     const [activeCategoryId, setActiveCategoryId] = useState(null);
     const dispatch = useDispatch();
     const getCategories = async () => {
-        const { success, message } = await props.getCategories();
-        const productsRes = await props.getCategoryProducts();
-        const bannersRes = await props.getBannerDeals();
-        if (!success || !productsRes.success || !bannersRes.success) {
-            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !success ? message : !productsRes.success ? productsRes.message : !bannersRes.success ? bannersRes.message : 'Failed to fetch data' } });
+        const [categoriesRes, productsRes, bannersRes] = await Promise.all([props.getCategories(), props.getCategoryProducts(), props.getBannerDeals()]);
+        if (!categoriesRes.success || !productsRes.success || !bannersRes.success) {
+            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !categoriesRes.success ? categoriesRes.message : !productsRes.success ? productsRes.message : !bannersRes.success ? bannersRes.message : 'Failed to fetch data' } });
         }
         setLoading(false);
     }
@@ -169,6 +168,10 @@ const Dashboard = (props) => {
                                 <div className="no-products-card">
                                     OOPS! No categories to display...
                                 </div>
+                        }
+                        {
+                            props.cartOpen && 
+                            <Cart />
                         }
                     </>
             }

@@ -1,9 +1,11 @@
-import Header from "./header";
+import Cart from "./cart";
 import { connect } from "react-redux";
+import actions from "../../actions";
 
 export default connect(
   state => ({
-    isLoggedIn: state.data.isLoggedIn,
+    categoriesData: state.data.categoriesData,
+    productsData: state.data.productsData,
     currentTab: state.data.currentTab,
     cartData: state.data.cartData,
     cartOpen: state.data.cartOpen
@@ -11,4 +13,4 @@ export default connect(
   {
     
   }
-)(Header);
+)(Cart);

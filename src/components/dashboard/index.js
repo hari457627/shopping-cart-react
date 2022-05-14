@@ -8,7 +8,8 @@ export default connect(
     productsData: state.data.productsData,
     currentTab: state.data.currentTab,
     bannerData: state.data.bannerData,
-    cartData: state.data.cartData
+    cartData: state.data.cartData,
+    cartOpen: state.data.cartOpen
   }),
   {
     checkUser: actions.checkUser,
