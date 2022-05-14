@@ -110,31 +110,33 @@ const Dashboard = (props) => {
                         {
                             (props.categoriesData && props.categoriesData.length) ?
                                 <div className="categories-block">
-                                    {renderCategoryList()}
+                                    <section>{renderCategoryList()}</section>
                                     {renderProductsList(false, true, false)}
-                                    <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
-                                        {
-                                            props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
-                                                <>
-                                                    <div>
-                                                        carosel
-                                                    </div>
-                                                    <div>
-                                                        {
-                                                            props.categoriesData.map((item, index) => {
-                                                                return (
-                                                                    <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} handleChange={handleChange}/>
-                                                                )
-                                                            })
-                                                        }
-                                                    </div>
-                                                </>
-                                                :
-                                                null
-                                        }
-                                        {props.currentTab == 1 && renderCategoryList(true)}
-                                        {props.currentTab == 1 && renderProductsList(true, true, true)}
-                                    </div>
+                                    <main>
+                                        <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
+                                            {
+                                                props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
+                                                    <>
+                                                        <div>
+                                                            carosel
+                                                        </div>
+                                                        <div>
+                                                            {
+                                                                props.categoriesData.map((item, index) => {
+                                                                    return (
+                                                                        <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} handleChange={handleChange}/>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
+                                                    </>
+                                                    :
+                                                    null
+                                            }
+                                            {props.currentTab == 1 && renderCategoryList(true)}
+                                            {props.currentTab == 1 && renderProductsList(true, true, true)}
+                                        </div>
+                                    </main>
                                 </div>
                                 :
                                 <div>

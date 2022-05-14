@@ -20,35 +20,39 @@ const Header = (props) => {
     }
 
     return (
-        <div className="header-container">
-            <div className="header-container-left-section">
-                <img className="header-logo" src={'./static/images/logo.png'}/>
-                <div className="header-container-tabs">
-                {
-                    props.isLoggedIn ?
-                    <Tabs value={props.currentTab} onChange={handleChange} aria-label="Shopping cart tabs">
-                        <Tab label="Home" className={`${props.currentTab === 0 ? 'header-nav-active-tab' : ''} header-nav`}/>
-                        <Tab label="Products" className={`${props.currentTab === 1 ? 'header-nav-active-tab' : ''} header-nav`}/>
-                    </Tabs>
-                    : null
-                }
+        <header>
+            <div className="header-container">
+                <div className="header-container-left-section">
+                    <img className="header-logo" src={'./static/images/logo.png'}/>
+                    <div className="header-container-tabs">
+                    {
+                        props.isLoggedIn ?
+                        <Tabs value={props.currentTab} onChange={handleChange} aria-label="Shopping cart tabs">
+                            <Tab label="Home" className={`${props.currentTab === 0 ? 'header-nav-active-tab' : ''} header-nav`}/>
+                            <Tab label="Products" className={`${props.currentTab === 1 ? 'header-nav-active-tab' : ''} header-nav`}/>
+                        </Tabs>
+                        : null
+                    }
+                    </div>
+                </div>
+                <div className="header-link-section">
+                    <nav>
+                    {
+                        !props.isLoggedIn
+                        ?
+                        <>
+                            <Link to={`/login`} className="header-links">Signin</Link>
+                            <Link to={`/signup`} className="header-links">Register</Link>
+                        </>
+                        :
+                        <>
+                            <Link to={`/login`} onClick={()=>handleLogout()} className="header-links">Logout</Link>
+                        </>
+                    }
+                    </nav>
                 </div>
             </div>
-            <div className="header-link-section">
-                {
-                    !props.isLoggedIn
-                    ?
-                    <>
-                        <Link to={`/login`} className="header-links">Signin</Link>
-                        <Link to={`/signup`} className="header-links">Register</Link>
-                    </>
-                    :
-                    <>
-                        <Link to={`/login`} onClick={()=>handleLogout()} className="header-links">Logout</Link>
-                    </>
-                }
-            </div>
-        </div>
+        </header>
     )
 }
 

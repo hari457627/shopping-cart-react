@@ -48,33 +48,35 @@ const Login = (props) => {
     },[])
 
     return (
-        <div className="login-block">
-            <div className="login-left-section">
-                <div className="login-header-content">Login</div>
-                <p className="login-para-content">Get access to your orders, Wishlist and Recommendations</p>
+        <main>
+            <div className="login-block">
+                <div className="login-left-section">
+                    <div className="login-header-content">Login</div>
+                    <p className="login-para-content">Get access to your orders, Wishlist and Recommendations</p>
+                </div>
+                <div className="login-right-section">
+                    <form onSubmit={onSubmit}>
+                        <TextField className="login-fields" required id="email" label="Email" variant="standard" type="email" value={credentials.email} onChange={onChange} 
+                            // inputProps={{
+                            //     autocomplete: 'new-password',
+                            //     form: {
+                            //         autocomplete: 'off'
+                            //     },
+                            // }} 
+                        /><br />
+                        <TextField className="login-fields" required id="password" label="Password" variant="standard" type="password" value={credentials.password} onChange={onChange}
+                            // inputProps={{
+                            //     autocomplete: 'new-password',
+                            //     form: {
+                            //         autocomplete: 'off'
+                            //     },
+                            // }} 
+                        /><br />
+                        <Button className="login-button" type="submit" variant="outlined">Login</Button>
+                    </form>
+                </div>
             </div>
-            <div className="login-right-section">
-                <form onSubmit={onSubmit}>
-                    <TextField className="login-fields" required id="email" label="Email" variant="standard" type="email" value={credentials.email} onChange={onChange} 
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
-                    /><br />
-                    <TextField className="login-fields" required id="password" label="Password" variant="standard" type="password" value={credentials.password} onChange={onChange}
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
-                    /><br />
-                    <Button className="login-button" type="submit" variant="outlined">Login</Button>
-                </form>
-            </div>
-        </div>
+        </main>
     )
 };
 

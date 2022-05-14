@@ -59,56 +59,58 @@ const Signup = (props) => {
     }, [])
 
     return (
-        <div className="login-block">
-            <div className="login-left-section">
-                <div className="login-header-content">Signup</div>
-                <p className="login-para-content">We do not share your personal details with anyopne</p>
+        <main>
+            <div className="login-block">
+                <div className="login-left-section">
+                    <div className="login-header-content">Signup</div>
+                    <p className="login-para-content">We do not share your personal details with anyopne</p>
+                </div>
+                <div className="login-right-section">
+                    <form onSubmit={onSubmit}>
+                        <TextField className="login-fields" required id="fname" label="First Name" variant="standard" type="text" value={credentials.fname} onChange={onChange}
+                        // inputProps={{
+                        //     autocomplete: 'new-password',
+                        //     form: {
+                        //         autocomplete: 'off'
+                        //     },
+                        // }} 
+                        /><br />
+                        <TextField className="login-fields" required id="lname" label="Last Name" variant="standard" type="text" value={credentials.lname} onChange={onChange}
+                        // inputProps={{
+                        //     autocomplete: 'new-password',
+                        //     form: {
+                        //         autocomplete: 'off'
+                        //     },
+                        // }} 
+                        /><br />
+                        <TextField className="login-fields" required id="email" label="Email" variant="standard" type="email" value={credentials.email} onChange={onChange}
+                        //  inputProps={{
+                        //     form: {
+                        //         autocomplete: 'off'
+                        //     },
+                        // }} 
+                        /><br />
+                        <TextField className="login-fields" required id="password" label="Password" variant="standard" type="password" value={credentials.password} onChange={onChange}
+                        // inputProps={{
+                        //     autocomplete: 'new-password',
+                        //     form: {
+                        //         autocomplete: 'off'
+                        //     },
+                        // }} 
+                        /><br />
+                        <TextField className="login-fields" required id="cnfpassword" label="Confirm Password" variant="standard" type="password" value={credentials.cnfpassword} onChange={onChange}
+                        // inputProps={{
+                        //     autocomplete: 'new-password',
+                        //     form: {
+                        //         autocomplete: 'off'
+                        //     },
+                        // }} 
+                        /><br />
+                        <Button className="login-button" type="submit" variant="outlined">Signup</Button>
+                    </form>
+                </div>
             </div>
-            <div className="login-right-section">
-                <form onSubmit={onSubmit}>
-                    <TextField className="login-fields" required id="fname" label="First Name" variant="standard" type="text" value={credentials.fname} onChange={onChange}
-                    // inputProps={{
-                    //     autocomplete: 'new-password',
-                    //     form: {
-                    //         autocomplete: 'off'
-                    //     },
-                    // }} 
-                    /><br />
-                    <TextField className="login-fields" required id="lname" label="Last Name" variant="standard" type="text" value={credentials.lname} onChange={onChange}
-                    // inputProps={{
-                    //     autocomplete: 'new-password',
-                    //     form: {
-                    //         autocomplete: 'off'
-                    //     },
-                    // }} 
-                    /><br />
-                    <TextField className="login-fields" required id="email" label="Email" variant="standard" type="email" value={credentials.email} onChange={onChange}
-                    //  inputProps={{
-                    //     form: {
-                    //         autocomplete: 'off'
-                    //     },
-                    // }} 
-                    /><br />
-                    <TextField className="login-fields" required id="password" label="Password" variant="standard" type="password" value={credentials.password} onChange={onChange}
-                    // inputProps={{
-                    //     autocomplete: 'new-password',
-                    //     form: {
-                    //         autocomplete: 'off'
-                    //     },
-                    // }} 
-                    /><br />
-                    <TextField className="login-fields" required id="cnfpassword" label="Confirm Password" variant="standard" type="password" value={credentials.cnfpassword} onChange={onChange}
-                    // inputProps={{
-                    //     autocomplete: 'new-password',
-                    //     form: {
-                    //         autocomplete: 'off'
-                    //     },
-                    // }} 
-                    /><br />
-                    <Button className="login-button" type="submit" variant="outlined">Signup</Button>
-                </form>
-            </div>
-        </div>
+        </main>
     )
 };
 
