@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import common_actions from "../../Common-Service";
 import { useDispatch } from 'react-redux';
 import types from "../../reducers/types";
 import Loader from "../loader";
 import ProductCard from "../product-card";
+import Carosel from "../carosel";
 import "./dashboard.css";
 
 const Dashboard = (props) => {
@@ -13,8 +14,9 @@ const Dashboard = (props) => {
     const getCategories = async () => {
         const { success, message } = await props.getCategories();
         const productsRes = await props.getCategoryProducts();
-        if (!success || !productsRes.success) {
-            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !success ? message : !productsRes.success ? productsRes.message : 'Failed to fetch data' } });
+        const bannersRes = await props.getBannerDeals();
+        if (!success || !productsRes.success || !bannersRes.success) {
+            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !success ? message : !productsRes.success ? productsRes.message : !bannersRes.success ? bannersRes.message : 'Failed to fetch data' } });
         }
         setLoading(false);
     }
@@ -99,6 +101,11 @@ const Dashboard = (props) => {
         )
     }
 
+    const bannerData = useMemo(() => {
+        if(props.bannerData) return props.bannerData;
+        else return [];
+    },[props.bannerData])
+
     return (
         <div>
             {
@@ -118,7 +125,7 @@ const Dashboard = (props) => {
                                                 props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
                                                     <>
                                                         <div>
-                                                            carosel
+                                                            <Carosel bannerData={bannerData}/>
                                                         </div>
                                                         <div>
                                                             {

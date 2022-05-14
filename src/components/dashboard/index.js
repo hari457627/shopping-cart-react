@@ -6,11 +6,13 @@ export default connect(
   state => ({
     categoriesData: state.data.categoriesData,
     productsData: state.data.productsData,
-    currentTab: state.data.currentTab
+    currentTab: state.data.currentTab,
+    bannerData: state.data.bannerData
   }),
   {
     checkUser: actions.checkUser,
     getCategories: actions.getCategories,
-    getCategoryProducts: actions.getCategoryProducts
+    getCategoryProducts: actions.getCategoryProducts,
+    getBannerDeals: actions.getBannerDeals
   }
 )(Dashboard);

@@ -76,6 +76,17 @@ const currentTab = (state = 0, action) => {
     }
 }
 
+const bannerData = (state = null, action) => {
+    switch (action.type) {
+        case types.BANNER_DATA:
+            return action.payload;
+        case types.LOGOUT:
+            return null;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     profileData,
     cartData,
@@ -83,5 +94,6 @@ export default combineReducers({
     productsData,
     isLoggedIn,
     snackBar,
-    currentTab
+    currentTab,
+    bannerData
 });

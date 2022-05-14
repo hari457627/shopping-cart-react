@@ -36,7 +36,7 @@ const Header = (props) => {
                     </div>
                 </div>
                 <div className="header-link-section">
-                    <nav>
+                    <nav style={{paddingTop: 15}}>
                     {
                         !props.isLoggedIn
                         ?
@@ -50,6 +50,9 @@ const Header = (props) => {
                         </>
                     }
                     </nav>
+                    <div className="cart-block">
+                        <img src={'./static/images/cart.svg'}/><span>0 items</span>
+                    </div>
                 </div>
             </div>
         </header>

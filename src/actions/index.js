@@ -82,6 +82,20 @@ const actions = {
         catch(err){
             return { success : false, message: err.message }; 
         }
+    },
+
+    getBannerDeals: () => async dispatch => {
+        try{
+            const {status, data} = await axios.get("./server/banners/index.get.json");
+            if(status === 200 && data){
+                dispatch({ type: types.BANNER_DATA, payload: data });
+                return { success : true, data };
+            }
+            return { success : false, data: null, message : 'No banners to display' };
+        }
+        catch(err){
+            return { success : false, message: err.message }; 
+        }
     }
 }
 
