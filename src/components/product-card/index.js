@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import "./product.css";
 
 const productCard = (props) => {
-    const { name, imageURL, description, price, stock, category, sku, id, key, imageUrl, path, even, setActiveCategoryId, fromipad, hide, handleChange, isMinDev } = props;
+    const { name, imageURL, description, price, stock, category, sku, id, key, imageUrl, path, even, setActiveCategoryId, fromipad, hide, handleChange, isMinDev, addToCart, productDetails } = props;
     return (
         <>
             <div key={id} className={`${fromipad ? 'product-card product-card-block' : 'product-card'} product-card-small`} onClick={() => { if (path === 'category') setActiveCategoryId(id); else return; }}>
@@ -24,7 +24,7 @@ const productCard = (props) => {
                                 MRP Rs.{price}
                             </div>
                             <div>
-                                <Button className="login-button" type="submit" variant="outlined">Buy Now</Button>
+                                <Button className="login-button" type="submit" variant="outlined" onClick={()=>addToCart(category, id, productDetails)}>Buy Now</Button>
                             </div>
                         </div>
                     </>
@@ -42,7 +42,7 @@ const productCard = (props) => {
                                 </div>
                             </div>
                             <div className="product-card-footer">
-                                <Button className="login-button" type="submit" variant="outlined">Buy Now @ Rs.{price}</Button>
+                                <Button className="login-button" type="submit" variant="outlined" onClick={()=>addToCart(category, id, productDetails)}>Buy Now @ Rs.{price}</Button>
                             </div>
                         </div>
                         <div className="product-card-min-desc-block-small">
@@ -55,7 +55,7 @@ const productCard = (props) => {
                                         {description}
                                     </div>
                                     <div className="product-card-footer">
-                                        <Button className="login-button" type="submit" variant="outlined">Buy Now @ Rs.{price}</Button>
+                                        <Button className="login-button" type="submit" variant="outlined" onClick={()=>addToCart(category, id, productDetails)}>Buy Now @ Rs.{price}</Button>
                                     </div>
                                 </div>
                             </div>

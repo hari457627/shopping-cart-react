@@ -7,7 +7,8 @@ export default connect(
     categoriesData: state.data.categoriesData,
     productsData: state.data.productsData,
     currentTab: state.data.currentTab,
-    bannerData: state.data.bannerData
+    bannerData: state.data.bannerData,
+    cartData: state.data.cartData
   }),
   {
     checkUser: actions.checkUser,

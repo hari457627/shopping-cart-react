@@ -18,6 +18,18 @@ const Header = (props) => {
     const handleChange = (e,val) => {
         dispatch({type: types.TAB_CHANGE, payload: val});
     }
+    const cartItems = () =>{
+        if(props.cartData){
+            let items = 0;
+            (Object.keys(props.cartData)).forEach(item => {
+                (Object.keys(props.cartData[item])).forEach(prod => {
+                    items = items + props.cartData[item][prod].quantity;
+                })
+            })
+            return items;
+        }
+        return 0;
+    }
 
     return (
         <header>
@@ -51,7 +63,7 @@ const Header = (props) => {
                     }
                     </nav>
                     <div className="cart-block">
-                        <img src={'./static/images/cart.svg'}/><span>0 items</span>
+                        <img src={'./static/images/cart.svg'}/><span style={{fontSize: 14}}>{cartItems()} items</span>
                     </div>
                 </div>
             </div>

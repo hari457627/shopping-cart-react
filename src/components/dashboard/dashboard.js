@@ -45,6 +45,26 @@ const Dashboard = (props) => {
         dispatch({type: types.TAB_CHANGE, payload: val});
     }
 
+    const addToCart = (catid, prodid, productDetails) => {
+        const prevCartData = JSON.parse(JSON.stringify(props.cartData ? props.cartData : {}));
+        if(prevCartData && prevCartData[catid]){
+            if(prevCartData[catid][prodid]){
+                prevCartData[catid][prodid] = {...productDetails, quantity : prevCartData[catid][prodid].quantity + 1};
+            }
+            else{
+                prevCartData[catid][prodid] = {...productDetails, quantity : 1};
+            }
+        }
+        else if(prevCartData && !prevCartData[catid]){
+            prevCartData[catid] = {[prodid] : {...productDetails, quantity : 1}}
+        }
+        else{
+            prevCartData[catid] = {};
+            prevCartData[catid][prodid] = {...productDetails, quantity : 1};
+        }
+        dispatch({type: types.CART_DATA, payload: prevCartData});
+    }
+
     useEffect(() => {
         const isLoggedIn = common_actions.isAuthenticated();
         if (isLoggedIn) {
@@ -89,7 +109,7 @@ const Dashboard = (props) => {
                     (dataArr && dataArr.length) ?
                         dataArr.map(item => {
                             return (
-                                <ProductCard {...item} path="product" fromipad={fromipad} hide={hide} handleChange={handleChange} isMinDev={isMinDev}/>
+                                <ProductCard {...item} path="product" fromipad={fromipad} hide={hide} handleChange={handleChange} isMinDev={isMinDev} addToCart={addToCart} productDetails={item}/>
                             )
                         })
                         :
