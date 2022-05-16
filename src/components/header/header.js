@@ -35,7 +35,9 @@ const Header = (props) => {
     }
 
     const toggleCart = () => {
-        dispatch({type: types.CART_OPEN, payload: !props.cartOpen}); 
+        if(props.isLoggedIn){
+            dispatch({type: types.CART_OPEN, payload: !props.cartOpen}); 
+        }
     }
 
     return (
