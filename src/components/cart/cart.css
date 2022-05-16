@@ -1,5 +1,5 @@
 .product-cart{
-    height: calc(100vh - 150px);
+    height: calc(100vh - 135px);
     width: 30%;
     background-color: #fff;
     float: right;
@@ -24,9 +24,9 @@
 .cart-footer{
     height: 60px;
     text-align: center;
-    position: relative;
-    bottom: 0;
     padding: 10px;
+    z-index: 2;
+    background-color: #fff;
 }
 .cart-items-list{
     flex: 1 1 auto;

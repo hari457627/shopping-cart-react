@@ -59,11 +59,12 @@
 @media only screen and (max-width: 600px) {
     .header-container {
         align-items: center;
+        height: 76px;
     }
 
     .header-logo {
         margin-left: 0;
-        height: 75px;
+        height: 65px;
     }
 
     .header-container-tabs {
