@@ -1,6 +1,6 @@
 .product-cart{
     height: calc(100vh - 150px);
-    width: 35%;
+    width: 30%;
     background-color: #fff;
     float: right;
     margin-right: 20px;
@@ -114,6 +114,12 @@
 }
 .cart-block-min-back{
     display: none;
+}
+.login-button-disabled{
+    background-color: rgba(0, 0, 0, 0.26) !important;
+}
+.cart-item-square-fab{
+    border-radius: 0 !important;
 }
 
 /* css media queries */

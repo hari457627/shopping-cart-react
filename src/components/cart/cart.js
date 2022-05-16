@@ -53,6 +53,18 @@ const Cart = (props) => {
         }
     }
 
+    const cartTotalPrice = () => {
+        let totalPrice = 0;
+        if(props.cartData){
+            Object.keys(props.cartData).forEach(cat => {
+                Object.keys(props.cartData[cat]).forEach(prod => {
+                    totalPrice = totalPrice + (props.cartData[cat][prod]['price'] * props.cartData[cat][prod]['quantity'])
+                })
+            })
+        }
+        return totalPrice;
+    }
+
     const renderCart = (isMinDevice = false) => {
         return (
             <Box className={`${isMinDevice ? 'product-cart product-cart-min-device' : 'product-cart'}`}>
@@ -77,9 +89,9 @@ const Cart = (props) => {
                                             <div className='cart-items-list-block-actions'>
                                                 <div className='cart-items-list-block-header'>{props.cartData[item][prod]['name']}</div>
                                                 <div className='cart-items-list-block-actions-section'>
-                                                    <div className='cart-items-list-block-actions-section-item'><Fab className='cart-items-list-block-actions-quantity' aria-label="add" color="red" onClick={() => handleEditQuantity(false, item, prod)}><RemoveIcon /></Fab></div>
+                                                    <div className='cart-items-list-block-actions-section-item'><Fab className={isMinDevice ? 'cart-items-list-block-actions-quantity cart-item-square-fab' : 'cart-items-list-block-actions-quantity'} aria-label="add" color="red" onClick={() => handleEditQuantity(false, item, prod)}><RemoveIcon /></Fab></div>
                                                     <div className='cart-items-list-block-actions-section-item'>{props.cartData[item][prod]['quantity']}</div>
-                                                    <div className='cart-items-list-block-actions-section-item'><Fab className='cart-items-list-block-actions-quantity' aria-label="add" color="red" onClick={() => handleEditQuantity(true, item, prod)}><AddIcon /></Fab></div>
+                                                    <div className='cart-items-list-block-actions-section-item'><Fab className={isMinDevice ? 'cart-items-list-block-actions-quantity cart-item-square-fab' : 'cart-items-list-block-actions-quantity'} aria-label="add" color="red" onClick={() => handleEditQuantity(true, item, prod)}><AddIcon /></Fab></div>
                                                     <div className='cart-items-list-block-actions-section-item'><ClearIcon /></div>
                                                     <div className='cart-items-list-block-actions-section-item'>Rs.{props.cartData[item][prod]['price']}</div>
                                                 </div>
@@ -105,9 +117,9 @@ const Cart = (props) => {
                     <div>
                         Promo code can be applied on payment page
                     </div>
-                    <Button className="login-button cart-footer-actions" type="submit" variant="outlined">
+                    <Button className={`${!props.cartData ? "login-button cart-footer-actions login-button-disabled" : "login-button cart-footer-actions"}`} type="submit" variant="outlined" disabled={!props.cartData}>
                         <span>Proceed to checkout</span>
-                        <div><span>Rs.187 <ArrowBackIosNewIcon style={{ fontSize: 14 }} /></span></div>
+                        <div><span>Rs.{cartTotalPrice()} <ArrowBackIosNewIcon style={{ fontSize: 14 }} /></span></div>
                     </Button>
                 </div>
             </Box>
