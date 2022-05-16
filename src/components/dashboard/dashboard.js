@@ -69,6 +69,7 @@ const Dashboard = (props) => {
         }
         await common_service.setUserCookies(prevCartData, true);
         dispatch({type: types.CART_DATA, payload: prevCartData});
+        dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: 'Product added to cart successfully' } });
     }
 
     useEffect(() => {

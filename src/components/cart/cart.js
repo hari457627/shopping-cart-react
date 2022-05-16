@@ -53,6 +53,7 @@ const Cart = (props) => {
                 await common_service.setUserCookies(prevCartData, true);
                 dispatch({ type: types.CART_DATA, payload: null });
             }
+            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: `Product ${add ? 'added to' : 'removed from'} cart successfully` } });
         }
     }
 
