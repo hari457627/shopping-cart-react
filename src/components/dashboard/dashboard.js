@@ -6,6 +6,9 @@ import Loader from "../loader";
 import ProductCard from "../product-card";
 import Carosel from "../carosel";
 import Cart from "../cart";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import common_service from "../../Common-Service";
 import "./dashboard.css";
 
 const Dashboard = (props) => {
@@ -13,9 +16,12 @@ const Dashboard = (props) => {
     const [activeCategoryId, setActiveCategoryId] = useState(null);
     const dispatch = useDispatch();
     const getCategories = async () => {
-        const [categoriesRes, productsRes, bannersRes] = await Promise.all([props.getCategories(), props.getCategoryProducts(), props.getBannerDeals()]);
+        const [categoriesRes, productsRes, bannersRes, cartDataRes] = await Promise.all([props.getCategories(), props.getCategoryProducts(), props.getBannerDeals(), common_service.getUserCookies()]);
         if (!categoriesRes.success || !productsRes.success || !bannersRes.success) {
             dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: !categoriesRes.success ? categoriesRes.message : !productsRes.success ? productsRes.message : !bannersRes.success ? bannersRes.message : 'Failed to fetch data' } });
+        }
+        if(cartDataRes && cartDataRes.cart_data){
+            dispatch({type: types.CART_DATA, payload: cartDataRes.cart_data});
         }
         setLoading(false);
     }
@@ -44,7 +50,7 @@ const Dashboard = (props) => {
         dispatch({type: types.TAB_CHANGE, payload: val});
     }
 
-    const addToCart = (catid, prodid, productDetails) => {
+    const addToCart = async (catid, prodid, productDetails) => {
         const prevCartData = JSON.parse(JSON.stringify(props.cartData ? props.cartData : {}));
         if(prevCartData && prevCartData[catid]){
             if(prevCartData[catid][prodid]){
@@ -61,6 +67,7 @@ const Dashboard = (props) => {
             prevCartData[catid] = {};
             prevCartData[catid][prodid] = {...productDetails, quantity : 1};
         }
+        await common_service.setUserCookies(prevCartData, true);
         dispatch({type: types.CART_DATA, payload: prevCartData});
     }
 
@@ -161,6 +168,27 @@ const Dashboard = (props) => {
                                                         null
                                                 }
                                                 {props.currentTab == 1 && !props.cartOpen && renderCategoryList(true)}
+                                                {
+                                                    props.currentTab == 1 && !props.cartOpen &&
+                                                    <div className="category-select-block">
+                                                        <Select
+                                                            labelId="category-select-label"
+                                                            className="category-select-dropdown"
+                                                            id="category-select"
+                                                            value={activeCategoryId}
+                                                            label="Category"
+                                                            onChange={(e)=> handleClickCategory(e.target.value)}
+                                                        >
+                                                            {
+                                                                props.categoriesData.map(cat => {
+                                                                    return (
+                                                                        <MenuItem value={cat.id}>{cat.name}</MenuItem>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </Select>
+                                                    </div>
+                                                }
                                                 {props.currentTab == 1 && !props.cartOpen && renderProductsList(true, true, true)}
                                             </div>
                                         </main>

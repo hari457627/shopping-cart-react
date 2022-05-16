@@ -121,6 +121,7 @@
         display: none;
         height: 250px;
         width: 100%;
+        margin: 5px 0px 15px 0px;
     }
     .product-card-desc-right-block{
         float: right;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '@mui/material/Modal';
 import { useDispatch } from 'react-redux';
 import types from "../../reducers/types";
@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import common_service from "../../Common-Service";
 import "./cart.css";
 
 const Cart = (props) => {
@@ -34,7 +35,7 @@ const Cart = (props) => {
         return 0;
     }
 
-    const handleEditQuantity = (add, catid, prodid) => {
+    const handleEditQuantity = async (add, catid, prodid) => {
         const prevCartData = JSON.parse(JSON.stringify(props.cartData ? props.cartData : {}));
         if (prevCartData && Object.keys(prevCartData).length) {
             if (prevCartData && prevCartData[catid] && prevCartData[catid][prodid] && prevCartData[catid][prodid].quantity === 1 && !add) {
@@ -46,8 +47,10 @@ const Cart = (props) => {
             else {
                 prevCartData[catid][prodid] = { ...prevCartData[catid][prodid], quantity: add ? prevCartData[catid][prodid].quantity + 1 : prevCartData[catid][prodid].quantity - 1 };
             }
+            await common_service.setUserCookies(prevCartData, true);
             dispatch({ type: types.CART_DATA, payload: prevCartData });
             if (prevCartData && !Object.keys(prevCartData).length) {
+                await common_service.setUserCookies(prevCartData, true);
                 dispatch({ type: types.CART_DATA, payload: null });
             }
         }

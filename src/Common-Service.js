@@ -11,23 +11,30 @@ const actions = {
         return false;
     },
 
-    setUserCookies : async (cred) => {
+    setUserCookies : async (cred, cartData = false) => {
         const cookie = new Cookies();
-        cookie.set("id", cred.id);
-        cookie.set("email", cred.email);
+        if(cartData){
+            cookie.set("cart_data", JSON.stringify(cred));
+        }
+        else{
+            cookie.set("id", cred.id);
+            cookie.set("email", cred.email);
+        }
     },
 
     clearUserCookies : async () => {
         const cookie = new Cookies();
         cookie.remove("id");
         cookie.remove("email");
+        cookie.remove("cart_data");
     },
 
     getUserCookies : async () => {
         const cookie = new Cookies();
         const id = cookie.get('id');
         const email = cookie.get("email");
-        return {id, email};
+        const cart_data = cookie.get("cart_data");
+        return {id, email, cart_data};
     }
 }
 
