@@ -17,6 +17,9 @@ const Header = (props) => {
     }
     const handleChange = (e,val) => {
         dispatch({type: types.TAB_CHANGE, payload: val});
+        if(props.cartOpen){
+            dispatch({type: types.CART_OPEN, payload: false});
+        }
     }
     const cartItems = () =>{
         if(props.cartData){
@@ -43,9 +46,9 @@ const Header = (props) => {
                     <div className="header-container-tabs">
                     {
                         props.isLoggedIn ?
-                        <Tabs value={props.currentTab} onChange={handleChange} aria-label="Shopping cart tabs">
-                            <Tab label="Home" className={`${props.currentTab === 0 ? 'header-nav-active-tab' : ''} header-nav`}/>
-                            <Tab label="Products" className={`${props.currentTab === 1 ? 'header-nav-active-tab' : ''} header-nav`}/>
+                        <Tabs value={props.cartOpen ? 3 : props.currentTab} onChange={handleChange} aria-label="Shopping cart tabs">
+                            <Tab label="Home" className={`${(props.currentTab === 0 && !props.cartOpen) ? 'header-nav-active-tab' : ''} header-nav`}/>
+                            <Tab label="Products" className={`${(props.currentTab === 1 && !props.cartOpen) ? 'header-nav-active-tab' : ''} header-nav`}/>
                         </Tabs>
                         : null
                     }

@@ -135,43 +135,45 @@ const Dashboard = (props) => {
                     <>
                         {
                             (props.categoriesData && props.categoriesData.length) ?
-                                <div className="categories-block">
-                                    {renderCategoryList()}
-                                    {renderProductsList(false, true, false)}
-                                    <main>
-                                        <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
-                                            {
-                                                props.currentTab == 0 && props.categoriesData && props.categoriesData.length ?
-                                                    <>
-                                                        <div>
-                                                            <Carosel bannerData={bannerData}/>
-                                                        </div>
-                                                        <div>
-                                                            {
-                                                                props.categoriesData.map((item, index) => {
-                                                                    return (
-                                                                        <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} handleChange={handleChange}/>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                    </>
-                                                    :
-                                                    null
-                                            }
-                                            {props.currentTab == 1 && renderCategoryList(true)}
-                                            {props.currentTab == 1 && renderProductsList(true, true, true)}
-                                        </div>
-                                    </main>
-                                </div>
+                                <>
+                                    <div className="categories-block">
+                                        {renderCategoryList()}
+                                        {renderProductsList(false, true, false)}
+                                        <main>
+                                            <div className={`${(props.currentTab == 1) ? 'categories-card-section-min categories-card-section-min-block' : 'categories-card-section-min'}`}>
+                                                {
+                                                    props.currentTab == 0 && !props.cartOpen && props.categoriesData && props.categoriesData.length ?
+                                                        <>
+                                                            <div>
+                                                                <Carosel bannerData={bannerData}/>
+                                                            </div>
+                                                            <div>
+                                                                {
+                                                                    props.categoriesData.map((item, index) => {
+                                                                        return (
+                                                                            <ProductCard {...item} path="category" even={index % 2 === 0} setActiveCategoryId={setActiveCategoryId} handleChange={handleChange}/>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        </>
+                                                        :
+                                                        null
+                                                }
+                                                {props.currentTab == 1 && !props.cartOpen && renderCategoryList(true)}
+                                                {props.currentTab == 1 && !props.cartOpen && renderProductsList(true, true, true)}
+                                            </div>
+                                        </main>
+                                        {
+                                            props.cartOpen && 
+                                            <div className="cart-block-mindevice"><Cart /></div>
+                                        }
+                                    </div>
+                                </>
                                 :
                                 <div className="no-products-card">
                                     OOPS! No categories to display...
                                 </div>
-                        }
-                        {
-                            props.cartOpen && 
-                            <Cart />
                         }
                     </>
             }

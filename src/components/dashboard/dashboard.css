@@ -59,6 +59,9 @@
     .categories-card-section-min{
         display: block;
     }
+    .cart-block-mindevice{
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 920px) {
@@ -79,5 +82,8 @@
     }
     .categories-card-section-min-block{
         display: flex;
+    }
+    .cart-block-mindevice{
+        width: 100%;
     }
 }
