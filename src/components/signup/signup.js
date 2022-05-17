@@ -15,8 +15,8 @@ const Signup = (props) => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        if(!credentials.fname || !credentials.fname.trim().length || !credentials.lname || !credentials.lname.trim().length || !credentials.email || !credentials.email.trim().length || !credentials.password || !credentials.password.trim().length || !credentials.cnfpassword || !credentials.cnfpassword.trim().length || (credentials.password !== credentials.cnfpassword)){
-            dispatch({type: types.OPEN_SNACKBAR, payload : {open: true, message : 'Fill all the fields, pwd and confirm pwd s/b same'}});
+        if(!credentials.fname || !credentials.fname.trim().length || !credentials.lname || !credentials.lname.trim().length || !credentials.email || !credentials.email.trim().length || !credentials.password || !credentials.password.trim().length || (credentials.password.trim().length < 6) || !credentials.cnfpassword || !credentials.cnfpassword.trim().length || (credentials.cnfpassword.trim().length < 6) || (credentials.password !== credentials.cnfpassword)){
+            dispatch({type: types.OPEN_SNACKBAR, payload : {open: true, message : 'Fill all the fields, pwd and confirm pwd s/b same with min 6 characters'}});
         }
         else{
             const res = await checkAuthUser({email : credentials.email, password : credentials.password}, true);
@@ -68,43 +68,14 @@ const Signup = (props) => {
                 <div className="login-right-section">
                     <form onSubmit={onSubmit}>
                         <TextField className="login-fields" required id="fname" label="First Name" variant="standard" type="text" value={credentials.fname} onChange={onChange}
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
                         /><br />
                         <TextField className="login-fields" required id="lname" label="Last Name" variant="standard" type="text" value={credentials.lname} onChange={onChange}
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
                         /><br />
                         <TextField className="login-fields" required id="email" label="Email" variant="standard" type="email" value={credentials.email} onChange={onChange}
-                        //  inputProps={{
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
                         /><br />
                         <TextField className="login-fields" required id="password" label="Password" variant="standard" type="password" value={credentials.password} onChange={onChange}
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
                         /><br />
-                        <TextField className="login-fields" required id="cnfpassword" label="Confirm Password" variant="standard" type="password" value={credentials.cnfpassword} onChange={onChange}
-                        // inputProps={{
-                        //     autocomplete: 'new-password',
-                        //     form: {
-                        //         autocomplete: 'off'
-                        //     },
-                        // }} 
+                        <TextField error={(credentials.password && credentials.password.trim().length && credentials.cnfpassword && credentials.cnfpassword.trim().length && credentials.password !== credentials.cnfpassword)} className="login-fields" required id="cnfpassword" label="Confirm Password" variant="standard" type="password" value={credentials.cnfpassword} onChange={onChange}
                         /><br />
                         <Button className="login-button" type="submit" variant="outlined">Signup</Button>
                     </form>

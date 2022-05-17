@@ -24,7 +24,7 @@ const Layout = (props) => {
             setTimeout(() => {
                 dispatch({type: types.OPEN_SNACKBAR, payload : {open: false, message : ''}});
                 setOpenSnackBar(false);
-            }, 2000)
+            }, 3000)
         }
     }, [openSnackBar])
     
