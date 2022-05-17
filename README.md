@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Test credential
+uname : test1@gmail.com
+pwd : test1@123
+
+uname : test2@gmail.com
+pwd : test2@123
+
+umname : hari@test.com
+pwd : hari@123
+
+or you can add a new profile object in file index.json present in path /public/server/profiles/index.json
