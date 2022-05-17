@@ -51,25 +51,7 @@ const Dashboard = (props) => {
     }
 
     const addToCart = async (catid, prodid, productDetails) => {
-        const prevCartData = JSON.parse(JSON.stringify(props.cartData ? props.cartData : {}));
-        if(prevCartData && prevCartData[catid]){
-            if(prevCartData[catid][prodid]){
-                prevCartData[catid][prodid] = {...productDetails, quantity : prevCartData[catid][prodid].quantity + 1};
-            }
-            else{
-                prevCartData[catid][prodid] = {...productDetails, quantity : 1};
-            }
-        }
-        else if(prevCartData && !prevCartData[catid]){
-            prevCartData[catid] = {[prodid] : {...productDetails, quantity : 1}}
-        }
-        else{
-            prevCartData[catid] = {};
-            prevCartData[catid][prodid] = {...productDetails, quantity : 1};
-        }
-        await common_service.setUserCookies(prevCartData, true);
-        dispatch({type: types.CART_DATA, payload: prevCartData});
-        dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: 'Product added to cart successfully' } });
+        await props.editCart(catid, prodid, productDetails, props.cartData, false);
     }
 
     useEffect(() => {

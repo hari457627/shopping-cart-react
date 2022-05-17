@@ -15,6 +15,7 @@ export default connect(
     checkUser: actions.checkUser,
     getCategories: actions.getCategories,
     getCategoryProducts: actions.getCategoryProducts,
-    getBannerDeals: actions.getBannerDeals
+    getBannerDeals: actions.getBannerDeals,
+    editCart: actions.editCart
   }
 )(Dashboard);

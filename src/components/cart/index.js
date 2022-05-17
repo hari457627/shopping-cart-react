@@ -11,6 +11,6 @@ export default connect(
     cartOpen: state.data.cartOpen
   }),
   {
-    
+    editCart: actions.editCart
   }
 )(Cart);

@@ -36,25 +36,7 @@ const Cart = (props) => {
     }
 
     const handleEditQuantity = async (add, catid, prodid) => {
-        const prevCartData = JSON.parse(JSON.stringify(props.cartData ? props.cartData : {}));
-        if (prevCartData && Object.keys(prevCartData).length) {
-            if (prevCartData && prevCartData[catid] && prevCartData[catid][prodid] && prevCartData[catid][prodid].quantity === 1 && !add) {
-                delete prevCartData[catid][prodid];
-                if (!Object.keys(prevCartData[catid]).length) {
-                    delete prevCartData[catid]
-                }
-            }
-            else {
-                prevCartData[catid][prodid] = { ...prevCartData[catid][prodid], quantity: add ? prevCartData[catid][prodid].quantity + 1 : prevCartData[catid][prodid].quantity - 1 };
-            }
-            await common_service.setUserCookies(prevCartData, true);
-            dispatch({ type: types.CART_DATA, payload: prevCartData });
-            if (prevCartData && !Object.keys(prevCartData).length) {
-                await common_service.setUserCookies(prevCartData, true);
-                dispatch({ type: types.CART_DATA, payload: null });
-            }
-            dispatch({ type: types.OPEN_SNACKBAR, payload: { open: true, message: `Product ${add ? 'added to' : 'removed from'} cart successfully` } });
-        }
+        await props.editCart(catid, prodid, null, props.cartData, true, add);
     }
 
     const cartTotalPrice = () => {
