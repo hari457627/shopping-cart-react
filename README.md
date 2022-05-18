@@ -78,7 +78,7 @@ pwd : test1@123
 uname : test2@gmail.com
 pwd : test2@123
 
-umname : hari@test.com
+uname : hari@test.com
 pwd : hari@123
 
 or you can add a new profile object in file index.json present in path /public/server/profiles/index.json
